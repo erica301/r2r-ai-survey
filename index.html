@@ -49,6 +49,8 @@ input[type=range]::-moz-range-thumb{width:24px; height:24px; border-radius:50%; 
 input[type=range]::-moz-range-progress{background:linear-gradient(90deg,var(--teal),var(--navy)); height:14px; border-radius:10px}
 input[type=range]::-moz-range-track{background:var(--grey); height:14px; border-radius:10px}
 .endlabels{display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin-top:5px}
+.legend{display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin:0 0 4px; font-weight:500}
+.legend span:nth-child(2){color:var(--teal-deep)}
 
 /* the two big dials */
 .dial input[type=range]{height:18px; border-radius:12px}
@@ -56,6 +58,7 @@ input[type=range]::-moz-range-track{background:var(--grey); height:14px; border-
 .dial .val{font-size:18px; padding:3px 14px; color:#fff}
 .dial.excite .val{background:var(--teal-deep)}
 .dial.skeptic .val{background:var(--navy)}
+.dial.conf .val{background:var(--teal)}
 .dial .lab{font-size:17px; font-weight:600}
 
 /* chips */
@@ -125,18 +128,24 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
     <h2>Where does your time actually go?</h2>
     <p class="sub">Drag each bar to roughly how much of a typical week it eats. No need to add up to 100 &mdash; just show the shape of your week.</p>
     <div id="time"></div>
+    <label class="field">
+      <span class="q">Something else that eats your time? <span class="hint">optional &mdash; name it</span></span>
+      <input type="text" id="time_other" placeholder="e.g. donor reporting, event logistics, partner comms…">
+    </label>
   </div>
 
-  <!-- AUTOMATE -->
+  <!-- ASSISTANT / SPECTRUM -->
   <div class="card" data-sec>
-    <div class="kicker">The wish list</div>
-    <h2>What would you love to hand off?</h2>
-    <p class="sub">How much would you love AI to take this off your plate? 0 = leave it with me, 100 = please, take it.</p>
-    <div id="automate"></div>
-    <label class="field">
-      <span class="q">Anything else you'd hand over tomorrow if you could? <span class="hint">optional</span></span>
-      <textarea id="automate_other" placeholder="The task you dread most…"></textarea>
+    <div class="kicker">Your ideal assistant</div>
+    <h2>If you had help, where would it sit?</h2>
+    <p class="sub">Picture an assistant working right alongside you. Some things you'd keep fully in your own hands, some you'd happily hand over, and plenty sit in between &mdash; where it helps and you stay in charge.</p>
+    <label class="field" style="margin-top:2px">
+      <span class="q">If you could hire that assistant tomorrow, what would you happily pass off?</span>
+      <textarea id="assistant_passoff" placeholder="The things you'd love to stop doing yourself…"></textarea>
     </label>
+    <p class="sub" style="margin:22px 0 6px">Now drag each one to where you'd want it to sit:</p>
+    <div class="legend"><span>Stays fully with me</span><span>We do it together</span><span>Hand to AI</span></div>
+    <div id="automate"></div>
   </div>
 
   <!-- AI NOW -->
@@ -157,7 +166,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
 
   <!-- DIALS -->
   <div class="card" data-sec>
-    <div class="kicker">Two dials</div>
+    <div class="kicker">Three dials</div>
     <h2>Excited and skeptical aren't opposites</h2>
     <p class="sub">You can be both at once. Set each one honestly.</p>
     <div class="slider dial excite">
@@ -169,6 +178,11 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
       <div class="top"><span class="lab">How <b>skeptical</b> are you, honestly?</span><span class="val" id="skepticism_v">50</span></div>
       <input type="range" id="skepticism" min="0" max="100" value="50">
       <div class="endlabels"><span>All in</span><span>Show me it's real</span></div>
+    </div>
+    <div class="slider dial conf">
+      <div class="top"><span class="lab">How <b>confident</b> do you feel using AI well right now?</span><span class="val" id="confidence_v">50</span></div>
+      <input type="range" id="confidence" min="0" max="100" value="50">
+      <div class="endlabels"><span>Just starting out</span><span>Very confident</span></div>
     </div>
   </div>
 
@@ -190,6 +204,25 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
     <h2>What would make this worth it?</h2>
     <p class="sub">How much do you want each of these out of the cohort? 0 = not for me, 100 = yes, this.</p>
     <div id="outcomes"></div>
+  </div>
+
+  <!-- TEAM / SHARED -->
+  <div class="card" data-sec>
+    <div class="kicker">As a team</div>
+    <h2>Where we could be stronger together</h2>
+    <p class="sub">This one's about the team, not just you. It's the part a shared system is built to fix.</p>
+    <label class="field" style="margin-top:2px">
+      <span class="q">What do you wish the whole team could see or share in one place?</span>
+      <textarea id="shared_wish" placeholder="Context, updates, who's doing what, where things live…"></textarea>
+    </label>
+    <label class="field">
+      <span class="q">What tends to fall through the cracks between people?</span>
+      <textarea id="team_gaps" placeholder="The things that get lost in the handoffs…"></textarea>
+    </label>
+    <label class="field">
+      <span class="q">A year from now, how would you love us to be working with AI as a team? <span class="hint">dream a little</span></span>
+      <textarea id="team_aspiration" placeholder="Paint the picture…"></textarea>
+    </label>
   </div>
 
   <!-- GUARDRAILS / AUTHORITY seeds -->
@@ -247,10 +280,10 @@ const SB_KEY="sb_publishable_7cAb8xuKWjts_3su6DlZBw_UydeUOlO";
 
 const TIME=["Email & messages","Meetings & calls","Writing & documents","Research & reading","Data, spreadsheets & reporting","Planning & project tracking","Scheduling & admin","Deep / strategic work"];
 const AUTOMATE=["Drafting emails & replies","Meeting notes & follow-ups","Scheduling & calendar","Data entry & reporting","Research & literature review","Qualitative analysis & coding","Document formatting & templates","Grant & report drafting","Task & project tracking","Finance & invoicing admin"];
-const AI_NOW=["Overall, how much do you use AI today?","Writing & editing","Summarizing & notetaking","Research & finding things","Analysis & thinking problems through","Brainstorming & ideas","Automating tasks / building tools"];
+const AI_NOW=["Overall, how much do you use AI today?","Writing & editing","Summarizing & notetaking","Research & finding things out","Thinking through problems / analysis","Brainstorming & ideas","Planning & prioritising my day","Managing & tracking my tasks","Getting it to do tasks for me, not just advise","Fact-checking & verifying","Learning & explaining things I don't know"];
 const FEELINGS=["Curious","Excited","Hopeful","Energized","Overwhelmed","Time-starved","Behind","Skeptical","Anxious","Protective of my craft","Unsure where to start","Relieved it's coming"];
 const CONCERNS=["Quality of the work","Ownership — is it still mine?","Losing my own skills","Data privacy & security","Partner / donor / participant trust","Ethics & appropriateness","Getting it wrong without noticing","Time it takes to learn","What it means for roles"];
-const OUTCOMES=["Get my workload under control","A system that keeps track of things for me","Use AI for research & qualitative analysis","Write & communicate faster","Feel confident I'm using AI safely","Free up time for the mission","Understand what's actually possible","Clear team guardrails we all follow"];
+const OUTCOMES=["Get my workload under control","A system that keeps track of things for me","Use AI for research & qualitative analysis","Write & communicate faster","Design & polish — slides, docs, formatting","Feel confident I'm using AI safely","Free up time for the mission","Understand what's actually possible","Clear team guardrails we all follow"];
 
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')}
 function fill(el){const v=+el.value; const pct=v+'%'; el.style.background=
@@ -270,7 +303,7 @@ function makeSliders(containerId, items, start){
   });
 }
 makeSliders('time', TIME, 20);
-makeSliders('automate', AUTOMATE, 40);
+makeSliders('automate', AUTOMATE, 50);   // spectrum: 0 = stays with me, 50 = together, 100 = hand to AI
 makeSliders('ai_now', AI_NOW, 10);
 makeSliders('concerns', CONCERNS, 30);
 makeSliders('outcomes', OUTCOMES, 50);
@@ -281,7 +314,7 @@ FEELINGS.forEach(f=>{const b=document.createElement('div'); b.className='chip'; 
   b.addEventListener('click',()=>{b.classList.toggle('on'); save();}); fc.appendChild(b);});
 
 // dials + autonomy
-['excitement','skepticism','autonomy'].forEach(id=>{
+['excitement','skepticism','confidence','autonomy'].forEach(id=>{
   const inp=document.getElementById(id), val=document.getElementById(id+'_v');
   fill(inp);
   inp.addEventListener('input',()=>{val.textContent=inp.value; fill(inp); progress(); save();});
@@ -303,15 +336,20 @@ function gather(){
       submitted_at: new Date().toISOString(),
       user_agent: navigator.userAgent,
       time_allocation: collectGroup('time',TIME),
-      automate: collectGroup('automate',AUTOMATE),
-      automate_other: document.getElementById('automate_other').value.trim(),
+      time_other: document.getElementById('time_other').value.trim(),
+      assistant_passoff: document.getElementById('assistant_passoff').value.trim(),
+      assist_spectrum: collectGroup('automate',AUTOMATE),  // 0 stays with me … 100 hand to AI
       ai_now: collectGroup('ai_now',AI_NOW),
       feelings: [...document.querySelectorAll('#feelings .chip.on')].map(c=>c.textContent),
       excitement: +document.getElementById('excitement').value,
       skepticism: +document.getElementById('skepticism').value,
+      confidence: +document.getElementById('confidence').value,
       concerns: collectGroup('concerns',CONCERNS),
       biggest_worry: document.getElementById('biggest_worry').value.trim(),
       outcomes: collectGroup('outcomes',OUTCOMES),
+      shared_wish: document.getElementById('shared_wish').value.trim(),
+      team_gaps: document.getElementById('team_gaps').value.trim(),
+      team_aspiration: document.getElementById('team_aspiration').value.trim(),
       autonomy: +document.getElementById('autonomy').value,
       human_in_loop: document.getElementById('human_in_loop').value.trim(),
       ai_shouldnt_touch: document.getElementById('ai_shouldnt_touch').value.trim(),
