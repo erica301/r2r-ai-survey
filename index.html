@@ -206,6 +206,42 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
     <div id="outcomes"></div>
   </div>
 
+  <!-- CURRENT FRICTION (what the OS removes) -->
+  <div class="card" data-sec>
+    <div class="kicker">How things run right now</div>
+    <h2>Where does it get hard today?</h2>
+    <p class="sub">Not how you feel &mdash; how it actually works right now. This is the friction a system that learns you and your context is built to take away, and it's the baseline we'll measure the change against.</p>
+    <div class="slider">
+      <div class="top"><span class="lab">How often do you start from scratch &mdash; re-explaining context, redoing something, or re-finding what you already knew?</span><span class="val" id="friction_scratch_v">50</span></div>
+      <input type="range" id="friction_scratch" min="0" max="100" value="50">
+      <div class="endlabels"><span>Rarely</span><span>Constantly</span></div>
+    </div>
+    <div class="slider">
+      <div class="top"><span class="lab">When you need to find something &mdash; a doc, a past decision, who knows about X &mdash; how easy is it?</span><span class="val" id="friction_find_v">50</span></div>
+      <input type="range" id="friction_find" min="0" max="100" value="50">
+      <div class="endlabels"><span>A real hunt</span><span>Found in seconds</span></div>
+    </div>
+    <div class="slider">
+      <div class="top"><span class="lab">How much of what the team knows lives only in people's heads vs. written down and findable?</span><span class="val" id="friction_captured_v">50</span></div>
+      <input type="range" id="friction_captured" min="0" max="100" value="50">
+      <div class="endlabels"><span>All in our heads</span><span>All written down</span></div>
+    </div>
+    <div class="slider">
+      <div class="top"><span class="lab">How clearly can you see who's doing what across the team &mdash; what's on each other's plates?</span><span class="val" id="friction_team_visibility_v">50</span></div>
+      <input type="range" id="friction_team_visibility" min="0" max="100" value="50">
+      <div class="endlabels"><span>No real idea</span><span>Crystal clear</span></div>
+    </div>
+    <div class="slider">
+      <div class="top"><span class="lab">Be honest: when you've taken on a new tool or system before, does it stick or fizzle out?</span><span class="val" id="friction_stickiness_v">50</span></div>
+      <input type="range" id="friction_stickiness" min="0" max="100" value="50">
+      <div class="endlabels"><span>Fizzles in a few weeks</span><span>It sticks</span></div>
+    </div>
+    <label class="field">
+      <span class="q">What do you always get asked about because only you know it &mdash; or what would be hard to cover if you were out for a month?</span>
+      <textarea id="tribal_knowledge" placeholder="The things that live in your head…"></textarea>
+    </label>
+  </div>
+
   <!-- TEAM / SHARED -->
   <div class="card" data-sec>
     <div class="kicker">As a team</div>
@@ -309,7 +345,7 @@ FEELINGS.forEach(f=>{const b=document.createElement('div'); b.className='chip'; 
   b.addEventListener('click',()=>{b.classList.toggle('on'); save();}); fc.appendChild(b);});
 
 // dials + autonomy
-['excitement','skepticism','confidence'].forEach(id=>{
+['excitement','skepticism','confidence','friction_scratch','friction_find','friction_captured','friction_team_visibility','friction_stickiness'].forEach(id=>{
   const inp=document.getElementById(id), val=document.getElementById(id+'_v');
   fill(inp);
   inp.addEventListener('input',()=>{val.textContent=inp.value; fill(inp); progress(); save();});
@@ -345,6 +381,14 @@ function gather(){
       shared_wish: document.getElementById('shared_wish').value.trim(),
       team_gaps: document.getElementById('team_gaps').value.trim(),
       team_aspiration: document.getElementById('team_aspiration').value.trim(),
+      friction: {
+        starting_from_scratch: +document.getElementById('friction_scratch').value,
+        findability: +document.getElementById('friction_find').value,
+        knowledge_captured: +document.getElementById('friction_captured').value,
+        team_visibility: +document.getElementById('friction_team_visibility').value,
+        tool_stickiness: +document.getElementById('friction_stickiness').value
+      },
+      tribal_knowledge: document.getElementById('tribal_knowledge').value.trim(),
       human_in_loop: document.getElementById('human_in_loop').value.trim(),
       ai_shouldnt_touch: document.getElementById('ai_shouldnt_touch').value.trim(),
       three_months: document.getElementById('three_months').value.trim(),
