@@ -238,11 +238,6 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
       <span class="q">Is there anything AI should never touch in our work?</span>
       <textarea id="ai_shouldnt_touch" placeholder="Where it simply shouldn't go…"></textarea>
     </label>
-    <div class="slider" style="margin-top:22px">
-      <div class="top"><span class="lab">How much should AI be allowed to do on its own before a person checks it?</span><span class="val" id="autonomy_v">50</span></div>
-      <input type="range" id="autonomy" min="0" max="100" value="50">
-      <div class="scale-note"><span>Draft only &mdash; I check everything before it goes anywhere</span><span>Handle routine things and just tell me after</span></div>
-    </div>
   </div>
 
   <!-- CLOSING free text -->
@@ -314,7 +309,7 @@ FEELINGS.forEach(f=>{const b=document.createElement('div'); b.className='chip'; 
   b.addEventListener('click',()=>{b.classList.toggle('on'); save();}); fc.appendChild(b);});
 
 // dials + autonomy
-['excitement','skepticism','confidence','autonomy'].forEach(id=>{
+['excitement','skepticism','confidence'].forEach(id=>{
   const inp=document.getElementById(id), val=document.getElementById(id+'_v');
   fill(inp);
   inp.addEventListener('input',()=>{val.textContent=inp.value; fill(inp); progress(); save();});
@@ -350,7 +345,6 @@ function gather(){
       shared_wish: document.getElementById('shared_wish').value.trim(),
       team_gaps: document.getElementById('team_gaps').value.trim(),
       team_aspiration: document.getElementById('team_aspiration').value.trim(),
-      autonomy: +document.getElementById('autonomy').value,
       human_in_loop: document.getElementById('human_in_loop').value.trim(),
       ai_shouldnt_touch: document.getElementById('ai_shouldnt_touch').value.trim(),
       three_months: document.getElementById('three_months').value.trim(),
