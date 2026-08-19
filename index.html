@@ -201,7 +201,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <!-- CURRENT FRICTION -->
   <div class="card" data-sec>
     <div class="kicker">How things run right now</div>
-    <h2>Where does it get hard today?</h2>
+    <h2>What do you struggle with today?</h2>
     <p class="sub">Not how you feel, how it actually works day to day.</p>
     <div class="slider">
       <div class="top"><span class="lab">How often do you redo work, re-explain context, or re-find things you already knew?</span><span class="val" id="friction_scratch_v">50</span></div>
@@ -219,9 +219,9 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
       <div class="endlabels"><span>All in our heads</span><span>All written down</span></div>
     </div>
     <div class="slider">
-      <div class="top"><span class="lab">How clearly can you see who's doing what across the team?</span><span class="val" id="friction_team_visibility_v">50</span></div>
+      <div class="top"><span class="lab">How clear a picture do you have of what's happening across the organization, and who's doing what?</span><span class="val" id="friction_team_visibility_v">50</span></div>
       <input type="range" id="friction_team_visibility" min="0" max="100" value="50">
-      <div class="endlabels"><span>No real idea</span><span>Crystal clear</span></div>
+      <div class="endlabels"><span>Very little</span><span>Full picture</span></div>
     </div>
     <div class="slider">
       <div class="top"><span class="lab">When you've taken on a new tool or system before, does it stick or fizzle out?</span><span class="val" id="friction_stickiness_v">50</span></div>
@@ -297,7 +297,7 @@ const AUTOMATE=["Drafting emails & messages","Meeting notes & follow-ups","Sched
 const AI_NOW=["Writing & editing","Summarizing & notetaking","Research & finding things out","Thinking through problems","Planning & tracking my tasks","Getting it to do tasks for me, not just advise","Fact-checking & verifying","Learning & explaining things"];
 const FEELINGS=["Curious","Excited","Hopeful","Overwhelmed","Time-starved","Skeptical","Anxious","Protective of my craft","Unsure where to start"];
 const CONCERNS=["Quality of the work","Ownership, is it still mine?","Losing my own skills","Data privacy & security","Getting it wrong without noticing","What it means for roles"];
-const OUTCOMES=["Get my workload under control","A system that keeps track of things for me","Use AI for research & qualitative analysis","Write & communicate faster","Making docs & slides look good","Feel confident I'm using AI safely","Free up time for the mission"];
+const OUTCOMES=["Get my workload under control","A system that keeps track of things for me","See what's happening across the whole organization","Get answers and intelligence quickly","Use AI for research & qualitative analysis","Write & communicate faster","Making docs & slides look good","Feel confident I'm using AI safely","Free up time for the mission"];
 
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')}
 function fill(el){const v=+el.value; const pct=v+'%'; el.style.background=
