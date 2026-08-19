@@ -1,7 +1,7 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Root to Rise — AI Cohort Check-in</title>
+<title>Root to Rise AI Cohort Check-in</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -52,7 +52,7 @@ input[type=range]::-moz-range-track{background:var(--grey); height:14px; border-
 .legend{display:flex; justify-content:space-between; font-size:11.5px; color:var(--muted); margin:0 0 4px; font-weight:500}
 .legend span:nth-child(2){color:var(--teal-deep)}
 
-/* the two big dials */
+/* the big dials */
 .dial input[type=range]{height:18px; border-radius:12px}
 .dial input[type=range]::-webkit-slider-thumb{width:32px; height:32px; border-width:4px}
 .dial .val{font-size:18px; padding:3px 14px; color:#fff}
@@ -81,11 +81,6 @@ textarea{min-height:76px}
 .namecard .opt.req{color:var(--navy); background:#e7eef6}
 .namecard.needs input{border-color:#b3402f}
 
-/* autonomy scale ticks */
-.scale-note{display:flex; justify-content:space-between; gap:12px; margin-top:8px}
-.scale-note span{font-size:12px; color:var(--muted); max-width:46%}
-.scale-note span:last-child{text-align:right}
-
 /* submit */
 .submit-wrap{text-align:center; margin-top:30px}
 button.submit{background:var(--navy); color:#fff; border:none; border-radius:30px; padding:16px 44px; font-size:17px; font-weight:600; font-family:inherit; cursor:pointer; box-shadow:0 6px 18px rgba(46,83,128,.28); transition:transform .12s, background .2s}
@@ -111,8 +106,8 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <header>
     <img src="./r2r-logo.png" alt="Root to Rise">
     <h1>Our AI cohort starts with you</h1>
-    <p class="lede">Before we begin, a quick check-in on where your time goes, how you're feeling about AI, and what you'd love to get out of this. It shapes our very first session.</p>
-    <p class="meta-line">About <b>7&ndash;10 minutes</b> &nbsp;·&nbsp; drag the bars, tap the chips &nbsp;·&nbsp; <b>be honest</b>, that's what helps most</p>
+    <p class="lede">A few quick questions before we start, so the first session is built around where the team actually is.</p>
+    <p class="meta-line">About <b>6 minutes</b> &nbsp;·&nbsp; drag the bars, tap the chips &nbsp;·&nbsp; <b>be honest</b>, that's what helps</p>
   </header>
 
   <!-- NAME -->
@@ -128,25 +123,20 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <div class="card" data-sec>
     <div class="kicker">Where it goes</div>
     <h2>Where does your time actually go?</h2>
-    <p class="sub">Drag each bar to roughly how much of a typical week it eats. No need to add up to 100 &mdash; just show the shape of your week.</p>
+    <p class="sub">Drag each bar to roughly how much of a normal week it takes. It doesn't need to add up to 100.</p>
     <div id="time"></div>
     <label class="field">
-      <span class="q">Something else that eats your time? <span class="hint">optional &mdash; name it</span></span>
+      <span class="q">Something else that takes a lot of your time? <span class="hint">optional</span></span>
       <input type="text" id="time_other" placeholder="e.g. donor reporting, event logistics, partner comms…">
     </label>
   </div>
 
-  <!-- ASSISTANT / SPECTRUM -->
+  <!-- DELEGATE / SPECTRUM -->
   <div class="card" data-sec>
-    <div class="kicker">Your ideal assistant</div>
-    <h2>If you had help, where would it sit?</h2>
-    <p class="sub">Picture an assistant working right alongside you. Some things you'd keep fully in your own hands, some you'd happily hand over, and plenty sit in between &mdash; where it helps and you stay in charge.</p>
-    <label class="field" style="margin-top:2px">
-      <span class="q">If you could hire that assistant tomorrow, what would you happily pass off?</span>
-      <textarea id="assistant_passoff" placeholder="The things you'd love to stop doing yourself…"></textarea>
-    </label>
-    <p class="sub" style="margin:22px 0 6px">Now drag each one to where you'd want it to sit:</p>
-    <div class="legend"><span>Stays fully with me</span><span>We do it together</span><span>Hand to AI</span></div>
+    <div class="kicker">Delegating</div>
+    <h2>If you had help, what would you delegate?</h2>
+    <p class="sub">Drag each task to where you'd want it.</p>
+    <div class="legend"><span>Keep it myself</span><span>Do it together</span><span>Hand it over</span></div>
     <div id="automate"></div>
   </div>
 
@@ -154,7 +144,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <div class="card" data-sec>
     <div class="kicker">Today</div>
     <h2>How are you using AI right now?</h2>
-    <p class="sub">Be honest, "not at all" is a completely fine and useful answer. 0 = never, 100 = all the time.</p>
+    <p class="sub">0 = never, 100 = all the time. "Not at all" is a fine answer.</p>
     <div id="ai_now"></div>
   </div>
 
@@ -162,7 +152,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <div class="card" data-sec>
     <div class="kicker">The honest bit</div>
     <h2>How are you feeling about it?</h2>
-    <p class="sub">Tap everything that rings true. You can pick as many as you like, and yes, opposites are allowed.</p>
+    <p class="sub">Tap everything that fits. Pick as many as you like.</p>
     <div class="chips" id="feelings"></div>
   </div>
 
@@ -195,7 +185,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
     <p class="sub">How much does each of these weigh on you? 0 = not a worry, 100 = a real concern.</p>
     <div id="concerns"></div>
     <label class="field">
-      <span class="q">If you had to name your single biggest worry, what is it? <span class="hint">optional</span></span>
+      <span class="q">Your single biggest worry, if you had to name one. <span class="hint">optional</span></span>
       <textarea id="biggest_worry" placeholder="Say it plainly…"></textarea>
     </label>
   </div>
@@ -208,38 +198,38 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
     <div id="outcomes"></div>
   </div>
 
-  <!-- CURRENT FRICTION (what the OS removes) -->
+  <!-- CURRENT FRICTION -->
   <div class="card" data-sec>
     <div class="kicker">How things run right now</div>
     <h2>Where does it get hard today?</h2>
-    <p class="sub">Not how you feel &mdash; how it actually works right now. This is the friction a system that learns you and your context is built to take away, and it's the baseline we'll measure the change against.</p>
+    <p class="sub">Not how you feel, how it actually works day to day.</p>
     <div class="slider">
-      <div class="top"><span class="lab">How often do you start from scratch &mdash; re-explaining context, redoing something, or re-finding what you already knew?</span><span class="val" id="friction_scratch_v">50</span></div>
+      <div class="top"><span class="lab">How often do you redo work, re-explain context, or re-find things you already knew?</span><span class="val" id="friction_scratch_v">50</span></div>
       <input type="range" id="friction_scratch" min="0" max="100" value="50">
       <div class="endlabels"><span>Rarely</span><span>Constantly</span></div>
     </div>
     <div class="slider">
-      <div class="top"><span class="lab">When you need to find something &mdash; a doc, a past decision, who knows about X &mdash; how easy is it?</span><span class="val" id="friction_find_v">50</span></div>
+      <div class="top"><span class="lab">How easy is it to find a document, a past decision, or who knows about something?</span><span class="val" id="friction_find_v">50</span></div>
       <input type="range" id="friction_find" min="0" max="100" value="50">
       <div class="endlabels"><span>A real hunt</span><span>Found in seconds</span></div>
     </div>
     <div class="slider">
-      <div class="top"><span class="lab">How much of what the team knows lives only in people's heads vs. written down and findable?</span><span class="val" id="friction_captured_v">50</span></div>
+      <div class="top"><span class="lab">How much of what the team knows lives only in people's heads vs. written down?</span><span class="val" id="friction_captured_v">50</span></div>
       <input type="range" id="friction_captured" min="0" max="100" value="50">
       <div class="endlabels"><span>All in our heads</span><span>All written down</span></div>
     </div>
     <div class="slider">
-      <div class="top"><span class="lab">How clearly can you see who's doing what across the team &mdash; what's on each other's plates?</span><span class="val" id="friction_team_visibility_v">50</span></div>
+      <div class="top"><span class="lab">How clearly can you see who's doing what across the team?</span><span class="val" id="friction_team_visibility_v">50</span></div>
       <input type="range" id="friction_team_visibility" min="0" max="100" value="50">
       <div class="endlabels"><span>No real idea</span><span>Crystal clear</span></div>
     </div>
     <div class="slider">
-      <div class="top"><span class="lab">Be honest: when you've taken on a new tool or system before, does it stick or fizzle out?</span><span class="val" id="friction_stickiness_v">50</span></div>
+      <div class="top"><span class="lab">When you've taken on a new tool or system before, does it stick or fizzle out?</span><span class="val" id="friction_stickiness_v">50</span></div>
       <input type="range" id="friction_stickiness" min="0" max="100" value="50">
       <div class="endlabels"><span>Fizzles in a few weeks</span><span>It sticks</span></div>
     </div>
     <label class="field">
-      <span class="q">What do you always get asked about because only you know it &mdash; or what would be hard to cover if you were out for a month?</span>
+      <span class="q">What do you always get asked about because only you know it? What would be hard to cover if you were out for a month?</span>
       <textarea id="tribal_knowledge" placeholder="The things that live in your head…"></textarea>
     </label>
   </div>
@@ -248,7 +238,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <div class="card" data-sec>
     <div class="kicker">As a team</div>
     <h2>Where we could be stronger together</h2>
-    <p class="sub">This one's about the team, not just you. It's the part a shared system is built to fix.</p>
+    <p class="sub">About the team, not just you.</p>
     <label class="field" style="margin-top:2px">
       <span class="q">What do you wish the whole team could see or share in one place?</span>
       <textarea id="shared_wish" placeholder="Context, updates, who's doing what, where things live…"></textarea>
@@ -257,19 +247,15 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
       <span class="q">What tends to fall through the cracks between people?</span>
       <textarea id="team_gaps" placeholder="The things that get lost in the handoffs…"></textarea>
     </label>
-    <label class="field">
-      <span class="q">A year from now, how would you love us to be working with AI as a team? <span class="hint">dream a little</span></span>
-      <textarea id="team_aspiration" placeholder="Paint the picture…"></textarea>
-    </label>
   </div>
 
   <!-- GUARDRAILS / AUTHORITY seeds -->
   <div class="card" data-sec>
     <div class="kicker">Setting the rules together</div>
     <h2>Where should the lines be?</h2>
-    <p class="sub">This feeds straight into the guardrails and the "who decides what" map we'll build in session one.</p>
+    <p class="sub">This shapes the ground rules we'll agree together in session one.</p>
     <label class="field">
-      <span class="q">Where must a human always stay in the loop? <span class="hint">the things AI can help with but never decide alone</span></span>
+      <span class="q">Where must a human always stay in the loop? <span class="hint">things AI can help with but shouldn't decide alone</span></span>
       <textarea id="human_in_loop" placeholder="e.g. anything a partner or donor sees, anything about a person…"></textarea>
     </label>
     <label class="field">
@@ -278,17 +264,12 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
     </label>
   </div>
 
-  <!-- CLOSING free text -->
+  <!-- CLOSING -->
   <div class="card" data-sec>
-    <div class="kicker">Looking ahead</div>
-    <h2>Picture it working</h2>
+    <div class="kicker">Last thing</div>
+    <h2>Anything you're hoping we cover?</h2>
     <label class="field" style="margin-top:4px">
-      <span class="q">If this cohort really works, what's different for you in three months?</span>
-      <textarea id="three_months" placeholder="What does a good week look like…"></textarea>
-    </label>
-    <label class="field">
-      <span class="q">One thing you're really hoping we cover. <span class="hint">optional</span></span>
-      <textarea id="hope_we_cover" placeholder="Don't be shy…"></textarea>
+      <textarea id="hope_we_cover" placeholder="Something specific you want from the sessions…"></textarea>
     </label>
   </div>
 
@@ -297,7 +278,7 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <div class="submit-wrap">
     <button class="submit" id="submit">Share my answers</button>
     <div class="err" id="err"></div>
-    <p class="privacy">Your answers go to Erica to design the cohort. They're kept within Root to Rise and used only to make the first session genuinely useful for the team.</p>
+    <p class="privacy">Your answers go to Erica to design the cohort. They stay within Root to Rise and are only used to shape the first session.</p>
   </div>
 </div>
 
@@ -311,12 +292,12 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
 const SB_URL="https://qxrqgpbspqkkuwfdlcqh.supabase.co";
 const SB_KEY="sb_publishable_7cAb8xuKWjts_3su6DlZBw_UydeUOlO";
 
-const TIME=["Email & messages","Meetings & calls","Writing & documents","Communications & outreach","Research & reading","Data, spreadsheets & reporting","Planning & project tracking","Scheduling & admin","Deep / strategic work"];
-const AUTOMATE=["Drafting emails & replies","Meeting notes & follow-ups","Scheduling & calendar","Data entry & reporting","Research & literature review","Qualitative analysis & coding","Document formatting & templates","Grant & report drafting","Communications & outreach","Task & project tracking","Finance & invoicing admin"];
-const AI_NOW=["Overall, how much do you use AI today?","Writing & editing","Summarizing & notetaking","Research & finding things out","Thinking through problems / analysis","Brainstorming & ideas","Planning & prioritising my day","Managing & tracking my tasks","Getting it to do tasks for me, not just advise","Fact-checking & verifying","Learning & explaining things I don't know"];
-const FEELINGS=["Curious","Excited","Hopeful","Energized","Overwhelmed","Time-starved","Behind","Skeptical","Anxious","Protective of my craft","Unsure where to start","Relieved it's coming"];
-const CONCERNS=["Quality of the work","Ownership — is it still mine?","Losing my own skills","Data privacy & security","Partner / donor / participant trust","Ethics & appropriateness","Getting it wrong without noticing","Time it takes to learn","What it means for roles"];
-const OUTCOMES=["Get my workload under control","A system that keeps track of things for me","Use AI for research & qualitative analysis","Write & communicate faster","Design & polish — slides, docs, formatting","Feel confident I'm using AI safely","Free up time for the mission","Understand what's actually possible","Clear team guardrails we all follow"];
+const TIME=["Email & messages","Meetings & calls","Writing & documents","Communications & outreach","Research & reading","Data & reporting","Planning, scheduling & admin"];
+const AUTOMATE=["Drafting emails & messages","Meeting notes & follow-ups","Scheduling & calendar","Research & literature review","Qualitative analysis & coding","Grant & report drafting","Task & project tracking"];
+const AI_NOW=["Writing & editing","Summarizing & notetaking","Research & finding things out","Thinking through problems","Planning & tracking my tasks","Getting it to do tasks for me, not just advise","Fact-checking & verifying","Learning & explaining things"];
+const FEELINGS=["Curious","Excited","Hopeful","Overwhelmed","Time-starved","Skeptical","Anxious","Protective of my craft","Unsure where to start"];
+const CONCERNS=["Quality of the work","Ownership, is it still mine?","Losing my own skills","Data privacy & security","Getting it wrong without noticing","What it means for roles"];
+const OUTCOMES=["Get my workload under control","A system that keeps track of things for me","Use AI for research & qualitative analysis","Write & communicate faster","Making docs & slides look good","Feel confident I'm using AI safely","Free up time for the mission"];
 
 function slug(s){return s.toLowerCase().replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'')}
 function fill(el){const v=+el.value; const pct=v+'%'; el.style.background=
@@ -336,7 +317,7 @@ function makeSliders(containerId, items, start){
   });
 }
 makeSliders('time', TIME, 20);
-makeSliders('automate', AUTOMATE, 50);   // spectrum: 0 = stays with me, 50 = together, 100 = hand to AI
+makeSliders('automate', AUTOMATE, 50);   // spectrum: 0 = keep it myself, 50 = together, 100 = hand it over
 makeSliders('ai_now', AI_NOW, 10);
 makeSliders('concerns', CONCERNS, 30);
 makeSliders('outcomes', OUTCOMES, 50);
@@ -346,7 +327,7 @@ const fc=document.getElementById('feelings');
 FEELINGS.forEach(f=>{const b=document.createElement('div'); b.className='chip'; b.textContent=f;
   b.addEventListener('click',()=>{b.classList.toggle('on'); save();}); fc.appendChild(b);});
 
-// dials + autonomy
+// dials + friction sliders
 ['excitement','skepticism','confidence','friction_scratch','friction_find','friction_captured','friction_team_visibility','friction_stickiness'].forEach(id=>{
   const inp=document.getElementById(id), val=document.getElementById(id+'_v');
   fill(inp);
@@ -370,8 +351,7 @@ function gather(){
       user_agent: navigator.userAgent,
       time_allocation: collectGroup('time',TIME),
       time_other: document.getElementById('time_other').value.trim(),
-      assistant_passoff: document.getElementById('assistant_passoff').value.trim(),
-      assist_spectrum: collectGroup('automate',AUTOMATE),  // 0 stays with me … 100 hand to AI
+      assist_spectrum: collectGroup('automate',AUTOMATE),  // 0 keep it myself … 100 hand it over
       ai_now: collectGroup('ai_now',AI_NOW),
       feelings: [...document.querySelectorAll('#feelings .chip.on')].map(c=>c.textContent),
       excitement: +document.getElementById('excitement').value,
@@ -382,7 +362,6 @@ function gather(){
       outcomes: collectGroup('outcomes',OUTCOMES),
       shared_wish: document.getElementById('shared_wish').value.trim(),
       team_gaps: document.getElementById('team_gaps').value.trim(),
-      team_aspiration: document.getElementById('team_aspiration').value.trim(),
       friction: {
         starting_from_scratch: +document.getElementById('friction_scratch').value,
         findability: +document.getElementById('friction_find').value,
@@ -393,14 +372,13 @@ function gather(){
       tribal_knowledge: document.getElementById('tribal_knowledge').value.trim(),
       human_in_loop: document.getElementById('human_in_loop').value.trim(),
       ai_shouldnt_touch: document.getElementById('ai_shouldnt_touch').value.trim(),
-      three_months: document.getElementById('three_months').value.trim(),
       hope_we_cover: document.getElementById('hope_we_cover').value.trim()
     }
   };
 }
 
 // light localStorage so a refresh doesn't lose work
-const LS='r2r_ai_survey_v1';
+const LS='r2r_ai_survey_v2';
 function save(){try{const d={};
   document.querySelectorAll('input[type=range]').forEach(i=>d[i.id]=i.value);
   document.querySelectorAll('input[type=text], textarea').forEach(i=>{if(i.id)d[i.id]=i.value;});
@@ -418,7 +396,7 @@ const btn=document.getElementById('submit'), err=document.getElementById('err');
 btn.addEventListener('click', async ()=>{
   if(document.getElementById('company').value){document.getElementById('form').style.display='none';document.getElementById('done').style.display='block';return;} // honeypot
   const nm=document.getElementById('name').value.trim();
-  if(!nm){ err.textContent="Please add your name at the top — I'm using it to tailor the session to each person."; document.querySelector('.namecard').classList.add('needs'); document.getElementById('name').focus(); window.scrollTo({top:0,behavior:'smooth'}); return; }
+  if(!nm){ err.textContent="Please add your name at the top. I'm using it to tailor the session to each person."; document.querySelector('.namecard').classList.add('needs'); document.getElementById('name').focus(); window.scrollTo({top:0,behavior:'smooth'}); return; }
   document.querySelector('.namecard').classList.remove('needs');
   err.textContent=''; btn.disabled=true; btn.textContent='Sending…';
   try{
@@ -434,7 +412,7 @@ btn.addEventListener('click', async ()=>{
     window.scrollTo(0,0);
   }catch(e){
     btn.disabled=false; btn.textContent='Share my answers';
-    err.textContent="Hmm, that didn't send. Check your connection and try again — or let Erica know and she'll sort it.";
+    err.textContent="Something went wrong sending that. Check your connection and try again, or let Erica know.";
     console.error(e);
   }
 });
