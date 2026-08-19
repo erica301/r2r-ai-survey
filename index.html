@@ -78,6 +78,8 @@ textarea{min-height:76px}
 /* name */
 .namecard{background:linear-gradient(180deg,#fff, #fbfaf5); }
 .namecard .opt{display:inline-block; font-size:12px; color:var(--teal-deep); background:#eef4f3; border-radius:20px; padding:2px 10px; margin-left:8px; font-weight:600; letter-spacing:.02em}
+.namecard .opt.req{color:var(--navy); background:#e7eef6}
+.namecard.needs input{border-color:#b3402f}
 
 /* autonomy scale ticks */
 .scale-note{display:flex; justify-content:space-between; gap:12px; margin-top:8px}
@@ -116,9 +118,9 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
   <!-- NAME -->
   <div class="card namecard">
     <label class="field" style="margin:0">
-      <span class="q">Your name <span class="opt">optional</span></span>
-      <span class="hint">Adding it helps me tailor the session to you. Leave it blank if you'd rather answer anonymously, the honest answers matter more than the name.</span>
-      <input type="text" id="name" autocomplete="name" placeholder="First name is plenty" style="margin-top:9px">
+      <span class="q">Your name <span class="opt req">required</span></span>
+      <span class="hint">I'm using this to tailor the session to each of you, so please add it. Everything you share stays within Root to Rise, and honest answers still help most, being named doesn't change that.</span>
+      <input type="text" id="name" autocomplete="name" placeholder="First and last name" style="margin-top:9px">
     </label>
   </div>
 
@@ -301,8 +303,8 @@ button.submit:disabled{opacity:.6; cursor:default; transform:none}
 
 <div id="done">
   <div class="leaf">🌱</div>
-  <h2>Thank you, honestly.</h2>
-  <p>That's exactly what I needed. I'll bring the whole team's answers together and shape our first session around where we actually are. See you there.</p>
+  <h2>Thank you!</h2>
+  <p>This will help us to plan a cohort that is most useful to you and the whole team. See you at the first session!</p>
 </div>
 
 <script>
@@ -415,6 +417,9 @@ restore();
 const btn=document.getElementById('submit'), err=document.getElementById('err');
 btn.addEventListener('click', async ()=>{
   if(document.getElementById('company').value){document.getElementById('form').style.display='none';document.getElementById('done').style.display='block';return;} // honeypot
+  const nm=document.getElementById('name').value.trim();
+  if(!nm){ err.textContent="Please add your name at the top — I'm using it to tailor the session to each person."; document.querySelector('.namecard').classList.add('needs'); document.getElementById('name').focus(); window.scrollTo({top:0,behavior:'smooth'}); return; }
+  document.querySelector('.namecard').classList.remove('needs');
   err.textContent=''; btn.disabled=true; btn.textContent='Sending…';
   try{
     const res=await fetch(SB_URL+'/rest/v1/ai_cohort_survey',{
